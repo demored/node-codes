@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>node订阅</title>    
+</head>
+<body>
+
+</body>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+<script>    
+    socket = io.connect('http://localhost:8006');
+    
+    //连接成功，将当前openid发送给订阅者
+    socket.on('connect_succ',function(data){
+        var socket_id = data.socket_id;
+        var postdata = {'userId':'hahhahahahahahahahahhaahhahahahhaha'};
+        socket.emit('login',postdata,function(result){
+            console.log("登录成功");
+        });
+    }); 
+    
+    //实时消息提示
+    socket.on('receive_msg',function(data){
+        console.log('接收到的消息为:' + data.msg);
+    })
+ 
+</script>
+</html>
